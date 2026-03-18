@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Recipe Finder App — Cook Amazing Meals With What You Have</title>
+    <meta
+      name="description"
+      content="Recipe Finder helps you discover delicious recipes based on ingredients you already have. Reduce food waste, plan meals, and cook like a chef!"
+    />
+    <meta
+      name="keywords"
+      content="recipe finder, ingredients, cooking, meal planner, food, recipes, Indian recipes"
+    />
+    <meta name="author" content="Recipe Finder App" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Recipe Finder App" />
+    <meta
+      property="og:description"
+      content="Discover recipes based on ingredients you already have!"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍴</text></svg>"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  </head>
+  <body>
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+      <div class="loader-content">
+        <div class="loader-emoji">🍴</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo"><a href="#">🍴 Recipe Finder</a></div>
+      <button class="hamburger" id="hBtn" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="#" id="lHome">🏠 Home</a></li>
+        <li><a href="#" id="lAbout">ℹ️ About</a></li>
+        <li><a href="#" id="lRecipes">🍴 Recipes</a></li>
+        <li>
+          <a href="#" id="lFavorites"
+            >❤️ Favorites <span class="fav-count" id="favCount">0</span></a
+          >
+        </li>
+        <li><a href="#" id="lMealPlan">📅 Meal Planner</a></li>
+        <li>
+          <a href="#" id="lShopping"
+            >🛒 Shopping <span class="shop-count" id="shopCount">0</span></a
+          >
+        </li>
+        <li><a href="#" id="lContact">📩 Contact</a></li>
+        <li><button id="darkBtn" aria-label="Toggle Dark Mode">🌙</button></li>
+      </ul>
+    </header>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      ↑
+    </button>
+
+    <!-- HERO -->
+    <section class="hero" id="heroSection">
+      <div class="hero-float">🍕</div>
+      <div class="hero-float">🥗</div>
+      <div class="hero-float">🍜</div>
+      <div class="hero-float">🍰</div>
+      <div class="hero-float">🥘</div>
+      <div class="hero-float">🍱</div>
+      <div class="hero-content">
+        <div class="hero-badge">🍴 Smart Recipe Finder</div>
+        <h1>
+          Cook Amazing Meals<br /><span id="typedText"></span
+          ><span class="typed-cursor"></span>
+        </h1>
+        <p>
+          Enter the ingredients you already have and discover hundreds of
+          delicious recipes. No more food waste!
+        </p>
+        <div class="hero-btns">
+          <button class="hero-btn-primary" id="heroFindBtn">
+            🔍 Find Recipes Now
+          </button>
+          <button class="hero-btn-secondary" id="heroAboutBtn">
+            Learn More
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>5000+</strong><span>Recipes</span>
+          </div>
+          <div class="hero-stat"><strong>100%</strong><span>Free</span></div>
+          <div class="hero-stat">
+            <strong>Zero</strong><span>Food Waste</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECIPE OF THE DAY -->
+    <div id="rotdSection" class="rotd-section">
+      <div class="rotd-inner">
+        <div class="rotd-label">⭐ Today's Special</div>
+        <div id="rotdCard" class="rotd-card">
+          <div class="rotd-loading">Loading today's special...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="aboutContent">
+      <div class="about-heading">
+        <h1>Welcome to Recipe Finder</h1>
+        <p>
+          Got leftover ingredients? Find amazing recipes and reduce food waste!
+        </p>
+      </div>
+      <div class="about-images">
+        <img
+          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+          alt="Discover Recipes"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80"
+          alt="Cook with what you have"
+        />
+      </div>
+      <div class="about-text">
+        <h2>What is Recipe Finder?</h2>
+        <p>
+          Recipe Finder helps you create meals based on ingredients you already
+          have. Save time, reduce food waste, and make delicious meals every
+          day.
+        </p>
+      </div>
+    </section>
+
+    <!-- RECIPES -->
+    <div class="container" id="recipesContainer">
+      <h1>🍴 Recipe Finder</h1>
+      <p class="subtitle">Turn your ingredients into amazing meals!</p>
+      <div class="search-history" id="searchHistory"></div>
+      <div class="search-container">
+        <div class="search-box">
+          <input
+            type="text"
+            id="ingredientInput"
+            placeholder="Enter ingredients (e.g., chicken, rice)"
+            autocomplete="off"
+            aria-label="Enter ingredients"
+          />
+          <div class="suggestions" id="suggestions" role="listbox"></div>
+        </div>
+        <button id="searchButton" aria-label="Search recipes">
+          🔍 Find Recipes
+        </button>
+      </div>
+      <div class="filters" role="group" aria-label="Diet filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="veg">🥦 Vegetarian</button>
+        <button class="filter-btn" data-filter="nonveg">🍗 Non-Veg</button>
+        <button class="filter-btn" data-sort="missing">↑ Least Missing</button>
+      </div>
+      <div class="cuisine-filters" role="group" aria-label="Cuisine filters">
+        <button class="cuisine-btn active" data-cuisine="all">🌍 All</button>
+        <button class="cuisine-btn" data-cuisine="indian">🇮🇳 Indian</button>
+        <button class="cuisine-btn" data-cuisine="italian">🇮🇹 Italian</button>
+        <button class="cuisine-btn" data-cuisine="chinese">🇨🇳 Chinese</button>
+        <button class="cuisine-btn" data-cuisine="mexican">🇲🇽 Mexican</button>
+        <button class="cuisine-btn" data-cuisine="american">🇺🇸 American</button>
+      </div>
+      <div id="recipeResults" class="recipe-results" role="main"></div>
+    </div>
+
+    <!-- FAVORITES -->
+    <div class="container" id="favoritesContainer">
+      <h1>❤️ My Favorites</h1>
+      <p class="subtitle">Your saved recipes</p>
+      <div id="favResults" class="recipe-results"></div>
+    </div>
+
+    <!-- MEAL PLANNER -->
+    <div class="container meal-planner-container" id="mealPlanContainer">
+      <h1>📅 Weekly Meal Planner</h1>
+      <p class="subtitle">Plan your meals for the whole week!</p>
+      <div id="mealEmptyState" class="meal-empty-state" style="display: none">
+        <div class="meal-empty-icon">📅</div>
+        <h3>No meals planned yet!</h3>
+        <p>Go to Recipes and click "📅" on any recipe card to add it here.</p>
+        <button class="hero-btn-primary" id="goToRecipesBtn">
+          Browse Recipes →
+        </button>
+      </div>
+      <div class="meal-grid" id="mealGrid"></div>
+      <div class="meal-actions" id="mealActions">
+        <button class="meal-action-btn" id="generateShoppingBtn">
+          🛒 Generate Shopping List
+        </button>
+        <button class="meal-action-btn secondary" id="clearPlanBtn">
+          🗑️ Clear All
+        </button>
+      </div>
+    </div>
+
+    <!-- SHOPPING LIST -->
+    <div class="container shopping-container" id="shoppingContainer">
+      <h1>🛒 Shopping List</h1>
+      <p class="subtitle">All missing ingredients in one place!</p>
+      <div id="shoppingList" class="shopping-list"></div>
+      <div class="shopping-actions" id="shoppingActions" style="display: none">
+        <button class="meal-action-btn" id="printListBtn">🖨️ Print</button>
+        <button class="meal-action-btn" id="shareListBtn">📤 WhatsApp</button>
+        <button class="meal-action-btn secondary" id="clearShoppingBtn">
+          🗑️ Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- RECIPE DETAIL MODAL -->
+    <div
+      class="modal-overlay"
+      id="modalOverlay"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal" id="recipeModal">
+        <button class="modal-close" id="modalClose" aria-label="Close">
+          ✕
+        </button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <!-- MEAL PLAN MODAL -->
+    <div
+      class="modal-overlay"
+      id="mealModalOverlay"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal meal-modal" id="mealModal">
+        <button class="modal-close" id="mealModalClose" aria-label="Close">
+          ✕
+        </button>
+        <h2>Add to Meal Plan</h2>
+        <p id="mealModalRecipeName"></p>
+        <div class="meal-modal-fields">
+          <div class="form-group">
+            <label for="mealDay">Day:</label>
+            <select id="mealDay">
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mealType">Meal:</label>
+            <select id="mealType">
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Snack</option>
+            </select>
+          </div>
+        </div>
+        <button
+          class="hero-btn-primary"
+          id="confirmMealAdd"
+          style="width: 100%; margin-top: 16px"
+        >
+          Add to Plan ✓
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section id="contactSection">
+      <div class="contact-container">
+        <h1>Contact Us</h1>
+        <p>Feel free to reach out with any questions or feedback.</p>
+        <div class="contact-info">
+          <ul>
+            <li>
+              <strong>Phone:</strong>
+              <a href="tel:+911234567890">+91-1234567890</a>
+            </li>
+            <li>
+              <strong>Email:</strong>
+              <a
+                href="#"
+                onclick="
+                  window.location =
+                    'mai' + 'lto:arpita' + 'chaudhary489@gmail.com';
+                  return false;
+                "
+                >arpitachaudhary489&#64;gmail.com</a
+              >
+            </li>
+            <li>
+              <strong>Address:</strong> 456 Spice Street, Connaught Place, New
+              Delhi - 110001
+            </li>
+            <li>
+              <strong>Social:</strong>
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener"
+                aria-label="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              |
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener"
+                aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              |
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="cName">Name:</label
+            ><input
+              type="text"
+              id="cName"
+              placeholder="Your Name"
+              required
+              autocomplete="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cEmail">Email:</label
+            ><input
+              type="email"
+              id="cEmail"
+              placeholder="Your Email"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cMessage">Message:</label
+            ><textarea
+              id="cMessage"
+              rows="4"
+              placeholder="Your Message"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" id="submitButton">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <h2>🍴 Recipe Finder</h2>
+        <p>Discover amazing recipes and elevate your culinary adventures.</p>
+        <div class="footer-links">
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Recipe Finder App. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
